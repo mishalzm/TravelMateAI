@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelMate AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">✈ TravelMate AI</div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="#planner">Find Destinations</a>
+            <button id="theme-toggle" class="theme-toggle">🌙 Dark Mode</button>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Discover Your Next Adventure</h1>
+        <p>Find your perfect destination with our AI-powered tourism recommendation system.</p>
+        <a href="#planner">
+            <button>Explore Destinations</button>
+        </a>
+    </section>
+
+    <section class="planner" id="planner">
+        <h2>Plan Your Trip</h2>
+        <p>Tell us about your travel preferences.</p>
+
+        <form action="/results" method="POST">
+
+            <label>Your Budget (₹)</label>
+            <input type="number" name="budget" min="1" placeholder="Enter your budget" required>
+
+            <label>Preferred Season</label>
+            <select name="season" required>
+                <option value="">Select Season</option>
+                <option value="Winter">Winter</option>
+                <option value="Summer">Summer</option>
+                <option value="Monsoon">Monsoon</option>
+            </select>
+
+            <label>Your Interest</label>
+            <select name="interest" required>
+                <option value="">Select Interest</option>
+                <option value="Beach">Beach</option>
+                <option value="Nature">Nature</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Culture">Culture</option>
+            </select>
+
+            <label>Travel Days</label>
+            <input type="number" name="days" min="1" placeholder="Number of days" required>
+
+            <button type="submit">Find My Destination</button>
+
+        </form>
+    </section>
+    <section class="features">
+
+         <h2>Why Choose TravelMate AI?</h2>
+         <p class="features-subtitle">
+             Smarter travel planning based on your preferences.
+         </p>
+
+         <div class="feature-container">
+
+             <div class="feature-card">
+                 <h3>Personalized Recommendations</h3>
+                 <p>Discover destinations based on your budget, interests and preferred season.</p>
+             </div>
+
+          <div class="feature-card">
+              <h3>AI-Powered Suggestions</h3>
+              <p>Find similar destinations using machine learning and content-based filtering.</p>
+          </div>
+
+          <div class="feature-card">
+              <h3>Smart Budget Planning</h3>
+              <p>Explore destinations that fit your available travel budget.</p>
+          </div>
+
+         </div>
+
+    </section>
+
+
+    <footer>
+        <p>© 2026 TravelMate AI | Smart Tourism Recommendation System</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='theme.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+day1.py
+exercise*.py
+exersice*.py
+gptcode.py
+main1.py
+travel_budget.py
+saved_trips.txt

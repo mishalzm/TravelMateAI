@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Destinations | TravelMate AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">✈ TravelMate AI</div>
+    <nav>
+       <a href="/">Home</a>
+       <button id="theme-toggle" class="theme-toggle">🌙 Dark Mode</button>
+    </nav>
+</header>
+
+<section class="results">
+
+    <div class="results-heading">
+        <span class="section-label">YOUR NEXT ADVENTURE</span>
+        <h2>Destinations Picked for You</h2>
+        <p>Explore places that match your travel preferences.</p>
+    </div>
+
+    <div class="search-summary">
+        <span>Budget: ₹{{ budget }}</span>
+        <span>Season: {{ season }}</span>
+        <span>Interest: {{ interest }}</span>
+        <span>{{ days }} Days</span>
+    </div>
+
+    {% if results %}
+        <div class="destination-search">
+             <input
+                  type="text"
+                  id="destination-search"
+                  placeholder="🔍 Search destinations..."
+              >
+        </div>
+
+        <div class="filter-container">
+             <label for="interest-filter">Filter by interest:</label>
+
+             <select id="interest-filter">
+                  <option value="all">All Interests</option>
+                  <option value="beach">Beach</option>
+                  <option value="nature">Nature</option>
+                  <option value="adventure">Adventure</option>
+                  <option value="culture">Culture</option>
+             </select>
+           </div>
+
+        <div class="destination-grid">
+
+            {% for place in results %}
+
+            <div class="destination-card">
+
+                <div class="destination-image-wrapper">
+                    <img
+                        src="{{ url_for('static', filename='images/' + place.name.lower() + '.jpg') }}"
+                        alt="{{ place.name }}"
+                        class="destination-image"
+                        onerror="this.style.display='none'"
+                    >
+                    <span class="destination-category">{{ place.interest }}</span>
+                </div>
+
+                <div class="destination-content">
+
+                    <h3>{{ place.name }}, {{ place.state }}</h3>
+
+                    <p class="destination-description">
+                        {{ place.description }}
+                    </p>
+
+                    <div class="destination-info">
+                        <div>
+                            <span>ESTIMATED BUDGET</span>
+                            <strong>₹{{ place.budget }}</strong>
+                        </div>
+
+                        <div>
+                            <span>BEST SEASON</span>
+                            <strong>{{ place.season }}</strong>
+                        </div>
+                    </div>
+
+                    <div class="recommendation-reason">
+                        <h4>Why Visit?</h4>
+                        <p>{{ place.reason }}</p>
+                    </div>
+
+                    <div class="attractions-section">
+                        <h4>Popular Attractions</h4>
+
+                        <div class="tag-list">
+                            {% for attraction in place.attractions %}
+                                <span class="info-tag">{{ attraction }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="similar-destinations">
+                        <h4>You May Also Like</h4>
+
+                        <div class="similar-list">
+                            {% for similar in place.similar %}
+                                <span class="similar-item">
+                                    {{ similar.name }}
+                                </span>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="no-results">
+            <h3>No Destinations Found</h3>
+            <p>Your budget is currently too low for our available destinations.</p>
+            <p>Try increasing your budget to discover more places.</p>
+        </div>
+
+    {% endif %}
+
+    <a href="/" class="back-button">← Plan Another Trip</a>
+
+</section>
+
+<footer>
+    <p>© 2026 TravelMate AI | Smart Tourism Recommendation System</p>
+</footer>
+
+<script src="{{ url_for('static', filename='theme.js') }}"></script>
+
+</body>
+</html>
+
+
